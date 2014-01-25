@@ -19,8 +19,9 @@ public class JeuArithmetique {
     public static final int EXTREME = 4;
     
     private static int degreDifficulte = FACILE;
-    private static int germe = 25;
-    private static Random generateur = new Random ( germe );
+    //MODIF//private static int germe = 25;
+    //MODIF//private static Random generateur = new Random ( germe );
+    private static Random generateur = new Random (System.currentTimeMillis());
     
     private static final int OP_MIN_FACILE = 1;
     private static final int OP_MAX_FACILE = 20;
