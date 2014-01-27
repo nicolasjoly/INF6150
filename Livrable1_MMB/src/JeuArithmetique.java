@@ -20,8 +20,8 @@ public class JeuArithmetique {
     
     
     private static int degreDifficulte = FACILE;
-    //private static int germe = 25;
-    //private static Random generateur = new Random ( germe );
+    //MODIF//private static int germe = 25;
+    //MODIF//private static Random generateur = new Random ( germe );
     private static Random generateur = new Random (System.currentTimeMillis());
     
     private static final int OP_MIN_FACILE = 1;
@@ -36,7 +36,9 @@ public class JeuArithmetique {
      * FACILE : operations + et -, operandes entre 1 et 20 inclusivement
      * MOYEN  : operations +, -, *, et /, operandes entre 1 et 50 inclusivement
      * DIFFICILE : operations +, -, *, / et %, operandes entre -25 et 25 inclusivement (sauf 0)
-     * @param degre degre de difficulte.  Si autre que FACILE, MOYEN ou DIFFICILE, FACILE sera choisi.
+     * EXTREME : Version 1 operations +, -, *, /, % et ^, operandes entre -25 et 25 inclusivement (sauf 0). Si l'operation est ^, le premier chiffre est entre 2 et 10, l'exposant est entre 2 et 3.
+     * 			 Version 2 operations +, -, *, / et %, operandes entre -25 et 25 inclusivement (sauf 0)
+     * @param degre degre de difficulte.  Si autre que FACILE, MOYEN, DIFFICILE ou EXTREME, FACILE sera choisi.
      */
     public static void choisirDegreDifficulte ( int degre ) {
         if ( degre == MOYEN || degre == DIFFICILE || degre == EXTREME) {

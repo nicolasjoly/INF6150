@@ -69,13 +69,13 @@ public class Tp2 {
 	
 	
 	public static void main (String[] params) throws ScriptException{
-		String nom = "";    //nom de l utilisateur 
-		int difficulte; // la difficulte de l opertaion   
+		String nom = "";    //nom de l'utilisateur 
+		int difficulte; // la difficulte de l'operation   
 		//String choix="";
 		int operande1;
 		int operande2;
 		int operande3;
-		int correction = 0;// les 2 nombres necessaire pour faire les calculs et le resultat obtenu et la correction si l utilisateur echoue apres 3 tentatives
+		int correction = 0;// les 2 nombres necessaires pour faire les calculs et le resultat obtenu et la correction si l'utilisateur echoue apres 3 tentatives
 		String resultat = "";
 		String equation = "";
 		boolean acces2 = true;
@@ -87,7 +87,7 @@ public class Tp2 {
 		char operation2 = ' ';
 		String pourcentage = "";
 		
-		System.out.println("Ce programme demande a l'utilisateur de saisir son nom, s'il veut faire une operation, choisir le degre de difficulte, et continue de proposer des operations arithmetiques tant que l utilisateur choisi oui,OUI,O ou o.et si l utilisateur choisi non il lui donne le resultat obtenu en fonction des operations faites et du nombre de tentatives faites avant de trouver le bon resultas(3 tentatives max)");
+		System.out.println("Ce programme demande a l'utilisateur de saisir son nom, choisir le degre de difficulte, et continue de proposer des operations arithmetiques tant que l'utilisateur n'entre pas fin. Il lui donne le resultat obtenu en fonction des operations faites et du nombre de tentatives faites avant de trouver le bon resultat(3 tentatives max)");
 		System.out.print("Veuillez entrer votre nom : ");
 		
 		nom = Clavier.lireString();
@@ -132,7 +132,7 @@ public class Tp2 {
 			System.out.println("Inscrire 'fin' dans la reponse d'une equation pour terminer et obtenir votre score.");
 			
 			
-			//http://stackoverflow.com/questions/13662001/java-string-to-math-equation
+			//PLAGIAT//http://stackoverflow.com/questions/13662001/java-string-to-math-equation
 			ScriptEngineManager mgr = new ScriptEngineManager();
 			ScriptEngine engine = mgr.getEngineByName("JavaScript");
 			
@@ -225,16 +225,17 @@ public class Tp2 {
 						i++;
 					}	    	  
 				}
-			} while(acces2);// ajouter la condition de s il trouve la reponse juste avant trois tentative.
+			} while(acces2);//Sort de la boucle si le joueur trouve la réponse en moins de trois tentatives
 			      
 			if(acces3)
 				score = score + 4 - i; 
 			    
 		}while(acces3); 
 		
+		//le programme donnera la mention appropriee en fonction du score obtenu
 		score = (score/3)/j;
 		if ( score < 0.45 ) {
-			pourcentage = "mediocre";                            //le programme donnera la mention appropriee en fonction du score obtenu
+			pourcentage = "mediocre";
 		}else if ( ( score >= 0.45) && ( score < 0.60) ){
 			pourcentage = "passable";
 		}else if ( ( score >= 0.60) && ( score < 0.75) ){
