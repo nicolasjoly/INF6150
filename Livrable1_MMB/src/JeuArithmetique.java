@@ -18,9 +18,10 @@ public class JeuArithmetique {
     public static final int DIFFICILE = 3;
     public static final int EXTREME = 4;
     
+    
     private static int degreDifficulte = FACILE;
-    //MODIF//private static int germe = 25;
-    //MODIF//private static Random generateur = new Random ( germe );
+    //private static int germe = 25;
+    //private static Random generateur = new Random ( germe );
     private static Random generateur = new Random (System.currentTimeMillis());
     
     private static final int OP_MIN_FACILE = 1;
@@ -52,8 +53,25 @@ public class JeuArithmetique {
      * @return le caractere correspondant a l'operation
      */
     public static char operationAuHasard () {
-        final String operations = "+-*/%";
-        return operations.charAt ( nombreAleatoire ( 0, degreDifficulte ) );
+        final String operations = "+-*/%^";
+        
+        int pos = 0;
+        switch(degreDifficulte){
+        case FACILE:
+        	pos = 1;
+        	break;
+        case MOYEN:
+        	pos = 3;
+        	break;
+        case DIFFICILE:
+        	pos = 4;
+        	break;
+        case EXTREME:
+        	pos = 5;
+        	break;
+        };
+
+        return operations.charAt ( nombreAleatoire ( 0, pos ) );
     } // operationAuHasard
     
     /**

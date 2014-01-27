@@ -1,3 +1,7 @@
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptEngine;
+import javax.script.ScriptException;
+
 public class Tp2 {
 
 	public static int saisirDegreDifficulte(){
@@ -64,20 +68,23 @@ public class Tp2 {
 	
 	
 	
-	public static void main (String[] params){
+	public static void main (String[] params) throws ScriptException{
 		String nom = "";    //nom de l utilisateur 
 		int difficulte; // la difficulte de l opertaion   
 		//String choix="";
 		int operande1;
 		int operande2;
+		int operande3;
 		int correction = 0;// les 2 nombres necessaire pour faire les calculs et le resultat obtenu et la correction si l utilisateur echoue apres 3 tentatives
 		String resultat = "";
+		String equation = "";
 		boolean acces2 = true;
 		boolean acces3 = true;
 		int i = 0;
 		int j = 0; //compteur
 		float score = 0;
-		char operation = ' ';
+		char operation1 = ' ';
+		char operation2 = ' ';
 		String pourcentage = "";
 		
 		System.out.println("Ce programme demande a l'utilisateur de saisir son nom, s'il veut faire une operation, choisir le degre de difficulte, et continue de proposer des operations arithmetiques tant que l utilisateur choisi oui,OUI,O ou o.et si l utilisateur choisi non il lui donne le resultat obtenu en fonction des operations faites et du nombre de tentatives faites avant de trouver le bon resultas(3 tentatives max)");
@@ -86,6 +93,9 @@ public class Tp2 {
 		nom = Clavier.lireString();
 		System.out.println("Bienvenue "+nom+" !");
 		difficulte = saisirDegreDifficulte();
+
+		
+		
 		
 		do{
 			i=0;
@@ -117,23 +127,80 @@ public class Tp2 {
 		  
 			operande1 = JeuArithmetique.operandeAuHasard ();
 			operande2 = JeuArithmetique.operandeAuHasard ();
-			operation = JeuArithmetique.operationAuHasard ();
+			operande3 = JeuArithmetique.operandeAuHasard ();
+			operation1 = JeuArithmetique.operationAuHasard ();
 			System.out.println("Inscrire 'fin' dans la reponse d'une equation pour terminer et obtenir votre score.");
-			System.out.println(operande1+" "+operation+" "+operande2+" = ?\n" );
-		  
+			
+			
+			//http://stackoverflow.com/questions/13662001/java-string-to-math-equation
+			ScriptEngineManager mgr = new ScriptEngineManager();
+			ScriptEngine engine = mgr.getEngineByName("JavaScript");
+			
+			if(difficulte == JeuArithmetique.EXTREME){
+				int nbOp = (int)(Math.random() * 2) + 1;
+				if(nbOp == 2){
+					JeuArithmetique.choisirDegreDifficulte ( JeuArithmetique.DIFFICILE);
+					operation1 = JeuArithmetique.operationAuHasard ();
+					operation2 = JeuArithmetique.operationAuHasard ();
+					JeuArithmetique.choisirDegreDifficulte ( JeuArithmetique.EXTREME);
+					System.out.println(operande1+" "+operation1+" "+operande2+" "+operation2+" "+operande3+" = ?\n" );
+					equation = Integer.toString(operande1)+operation1+Integer.toString(operande2)+operation2+Integer.toString(operande3);
+				}
+				else{
+					if(operation1 == '^'){
+						operande1 = (int)(Math.random() * 9) + 2;
+						operande2 = (int)(Math.random() * 2) + 2;
+					}
+					System.out.println(operande1+" "+operation1+" "+operande2+" = ?\n" );
+					equation = Integer.toString(operande1)+operation1+Integer.toString(operande2);
+					
+					
+				}
+			}else{
+				System.out.println(operande1+" "+operation1+" "+operande2+" = ?\n" );
+				equation = Integer.toString(operande1)+operation1+Integer.toString(operande2);
+			}
+			
+			
+			equation = equation.replaceAll("--", "+");
+			
+			if(operation1 == '^'){
+				correction = (int) Math.pow(operande1, operande2);
+			}else{
+				double jus = (double) (engine.eval(equation));
+				
+				correction = (int)(jus);
+			}
+			//CHEAT MODE
+			System.out.println(correction);
+			
 		  //System.out.println("");
 			do{
 				i++;    
-				System.out.print("Entrez votre reponse : ");  
-				resultat = Clavier.lireString();
+
 		  
-				if(resultat.toLowerCase().equals("fin")){
-					acces3 = false;
-					acces2 = false;
-					j--;
+				boolean entreeValide = false;
+				
+				while(!entreeValide){
+					try{
+						System.out.print("Entrez votre reponse : ");  
+						resultat = Clavier.lireString();
+						Integer.parseInt(resultat);
+						entreeValide = true;
+					}catch(NumberFormatException e){						
+						if(resultat.toLowerCase().equals("fin")){
+							entreeValide = true;
+							acces3 = false;
+							acces2 = false;
+							j--;
+						}
+						else
+							System.out.println("Entree invalide");
+					}
 				}
-				else{
-					if ( operation == '+')
+				
+				if(acces2 && acces3){
+					/*if ( operation == '+')
 						correction = operande1  + operande2 ;
 					if ( operation == '*')
 						correction = operande1  * operande2 ;
@@ -142,7 +209,7 @@ public class Tp2 {
 					if ( operation == '/')
 						correction = operande1  / operande2 ;
 					if ( operation == '%')
-						correction = operande1  % operande2 ;
+						correction = operande1  % operande2 ;*/
 		  
 					if(Integer.parseInt(resultat) == correction){
 						System.out.println("Bravo "+nom+" ! Bonne reponse !");
