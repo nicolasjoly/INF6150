@@ -1,4 +1,3 @@
-
 /**
  * I N F 1 1 2 0 - TP2 hiver 2009
  *
@@ -38,16 +37,14 @@ public class JeuArithmetique {
      * DIFFICILE : operations +, -, *, / et %, operandes entre -25 et 25 inclusivement (sauf 0)
      * EXTREME : Version 1 operations +, -, *, /, % et ^, operandes entre -25 et 25 inclusivement (sauf 0). Si l'operation est ^, le premier chiffre est entre 2 et 10, l'exposant est entre 2 et 3.
      * 			 Version 2 operations +, -, *, / et %, operandes entre -25 et 25 inclusivement (sauf 0)
-     * @param degre degre de difficulte.  Si autre que FACILE, MOYEN, DIFFICILE ou EXTREME, FACILE sera choisi.
+     * @param degre degre de difficulte.  Les choix sont: FACILE, MOYEN, DIFFICILE et EXTREME.
      */
     public static void choisirDegreDifficulte ( int degre ) {
         if ( degre == MOYEN || degre == DIFFICILE || degre == EXTREME) {
             degreDifficulte = degre;
         } else {
             degreDifficulte = FACILE;
-        }
-        
-       
+        } 
     } // choisirDegreDifficulte
 
     /**
@@ -81,20 +78,19 @@ public class JeuArithmetique {
      * @return le nombre choisi au hasard
      */
     public static int operandeAuHasard () {
-        int reponse;
+        int operande;
         if ( degreDifficulte == FACILE ) {
-            reponse = nombreAleatoire ( OP_MIN_FACILE, OP_MAX_FACILE );
+        	operande = nombreAleatoire ( OP_MIN_FACILE, OP_MAX_FACILE );
         } else if ( degreDifficulte == MOYEN ) {
-            reponse = nombreAleatoire ( OP_MIN_MOYEN, OP_MAX_MOYEN );
+        	operande = nombreAleatoire ( OP_MIN_MOYEN, OP_MAX_MOYEN );
         } else {
             do {
-                reponse = nombreAleatoire ( OP_MIN_DIFFICILE, OP_MAX_DIFFICILE );
-            } while ( reponse == 0 );
+            	operande = nombreAleatoire ( OP_MIN_DIFFICILE, OP_MAX_DIFFICILE );
+            } while ( operande == 0 );
         }
-        return reponse;
+        return operande;
     } // operandeAuHasard
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
     
 
     
