@@ -123,7 +123,7 @@ public class Tp2 {
 				correction = (int) Math.pow(operande1, operande2);
 			}else{
 				double correctionTemp = (double) (engine.eval(equation));
-				correction = (int)(correctionTemp);
+				correction = (int) Math.round(correctionTemp);
 			}
 			//////////////////////////////CHEAT MODE///////////////////////////////////////////
 			System.out.println(correction);
@@ -157,7 +157,6 @@ public class Tp2 {
 					}
 					else{
 						System.out.println("Desole "+nomUtilisateur+", ce n'est pas la bonne reponse.");
-						///////////////////////////DEVRAIT PAS AVOIR i++ ICI VU QUE C UN ECHEC SUR LES 3.........SPA LOGIQUE SINON/////////////////////
 					}
 					
 					if(i==3 && boucleUneQuestion){
