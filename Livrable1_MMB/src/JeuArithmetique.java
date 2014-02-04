@@ -19,9 +19,15 @@ public class JeuArithmetique {
     
     
     private static int degreDifficulte = FACILE;
-    //MODIF//private static int germe = 25;
-    //MODIF//private static Random generateur = new Random ( germe );
-    private static Random generateur = new Random (System.currentTimeMillis());
+    private static int germe = 25;
+    private static Random generateur = new Random ( germe );
+    
+	/*******************************************
+	 * Amelioration potentielle:
+	 * private static Random generateur = new Random (System.currentTimeMillis());
+	 * 
+	 * Ceci permet d'avoir des questions differentes a chaque nouvelle partie
+	 *******************************************/
     
     private static final int OP_MIN_FACILE = 1;
     private static final int OP_MAX_FACILE = 20;
@@ -51,6 +57,11 @@ public class JeuArithmetique {
      * Retourne une operation choisie au hasard en fonction du degre de difficulte choisi
      * @return le caractere correspondant a l'operation
      */
+	/*******************************************
+	 * Ameliorations apportees:
+	 * Modification du code suivant afin de permettre le cas EXTREME.
+	 * Modification de la formule afin d'accomoder le changement fait au debut (MOYEN = 2; a la place de 3)
+	 *******************************************/
     public static char operationAuHasard () {
         final String operations = "+-*/%^";
         
@@ -92,9 +103,6 @@ public class JeuArithmetique {
     } // operandeAuHasard
 
     
-
-    
-
     private static int nombreAleatoire ( int min, int max ) {
         int reponse;
         if ( min > max ) {
